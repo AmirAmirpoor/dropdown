@@ -7,6 +7,7 @@ const Dropdown = ({
   selected,
   onOptionSelect,
   maxWidth,
+  direction = "BOTTOM",
 }) => {
   const [visible, setVisible] = useState(false);
   const dropdownRef = useRef();
@@ -26,6 +27,12 @@ const Dropdown = ({
   const toggleDropdown = () => {
     setVisible((visible) => !visible);
   };
+
+  const visibleClass = visible ? "dropdown__options--visible" : "";
+  const directionClass =
+    direction === "BOTTOM"
+      ? "dropdown__options--bottom"
+      : "dropdown__options--top";
   return (
     <div
       className="dropdown"
@@ -36,7 +43,7 @@ const Dropdown = ({
         {selected ? selected.title : title}
       </div>
 
-      <ul className={`dropdown__options ${visible && "visible"}`}>
+      <ul className={`dropdown__options ${visibleClass} ${directionClass}`}>
         {options.map((option) => {
           const isSelected = selected && selected.id === option.id;
           return (

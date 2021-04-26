@@ -17,6 +17,8 @@ const App = () => {
   return (
     <div className="App">
       <h1>DROPDOWN</h1>
+      <br />
+      <br />
       <Dropdown
         title="ُSelect a Movie"
         options={movies}
