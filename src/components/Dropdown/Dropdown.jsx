@@ -8,6 +8,7 @@ const Dropdown = ({
   onOptionSelect,
   maxWidth,
   direction = "BOTTOM",
+  type = "SINGLE", // SINGLE or MULTIPLE
 }) => {
   const [visible, setVisible] = useState(false);
   const dropdownRef = useRef();
@@ -40,12 +41,15 @@ const Dropdown = ({
       ref={dropdownRef}
     >
       <div className="dropdown__header" onClick={toggleDropdown}>
-        {selected ? selected.title : title}
+        {type === "SINGLE" ? (selected ? selected.title : title) : title}
       </div>
 
       <ul className={`dropdown__options ${visibleClass} ${directionClass}`}>
         {options.map((option) => {
-          const isSelected = selected && selected.id === option.id;
+          const isSelected =
+            type === "SINGLE"
+              ? selected && selected.id === option.id
+              : selected && selected.some((s) => s.id === option.id);
           return (
             <li
               key={option.id}
